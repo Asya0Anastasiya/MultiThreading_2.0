@@ -23,8 +23,8 @@ namespace MultiThreading_2._0
             var objChart = chart1.ChartAreas[0];
             var objChart1 = chart2.ChartAreas[0];
 
-            objChart.AxisX.Interval = 5;
-            objChart.AxisY.Interval = 40;
+            objChart.AxisX.Interval = Convert.ToInt32(textBox6.Text);
+            objChart.AxisY.Interval = Convert.ToInt32(textBox7.Text);
 
             objChart.AxisX.Minimum = 1;
             objChart.AxisX.Maximum = threadsCount;
@@ -72,12 +72,10 @@ namespace MultiThreading_2._0
             {
                 DateTime start = DateTime.Now;
                 CalculateWithoutMultiThreading(0, arrayLength, i * deltaK + deltaK, a, b);
-                //points1[i] = new Point(i + deltaK, (int)((DateTime.Now.Subtract(start)).Milliseconds));
                 chart2.Series[0].Points.AddXY(i * deltaK + deltaK, (int)((DateTime.Now.Subtract(start)).Milliseconds));
 
                 start = DateTime.Now;
                 CalculateWithoutMultiThreading(0, arrayLength, difficultyParameter, a, b);
-                //points1[i] = new Point(i + deltaK, (int)((DateTime.Now.Subtract(start)).Milliseconds));
                 chart1.Series[1].Points.AddXY(i, (int)((DateTime.Now.Subtract(start)).Milliseconds));
             }
 
@@ -86,7 +84,6 @@ namespace MultiThreading_2._0
             {
                 DateTime start = DateTime.Now;
                 CalculateWithinMultiThreading(arrayLength, difficultyParameter, a, b, i * deltaThreads + deltaThreads);
-                //points[i] = new Point(i * deltaThreads + deltaThreads, (int)((DateTime.Now.Subtract(start)).Milliseconds));
                 chart1.Series[0].Points.AddXY(i * deltaThreads + deltaThreads, (int)((DateTime.Now.Subtract(start)).Milliseconds));
             }
 
